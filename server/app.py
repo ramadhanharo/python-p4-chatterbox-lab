@@ -50,11 +50,11 @@ def messages_by_id(id):
         try:
             if not data or not any(attr in ['body', 'username'] for attr in data):
                 return make_response({'error': "must include 'body' or 'username'"}, 400)
-            
+
             for attr in data:
                 if attr in ['body', 'username']:
                     if not data[attr] or not isinstance(data[attr], str):
-                        return make_response({'error': f'Invalid value for {attr}'}, 400)
+                        return make_response({'error': 'Invalid value for {}'.format(attr)}, 400)
                     setattr(message, attr, data[attr])
             
             db.session.commit()
